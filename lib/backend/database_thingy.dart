@@ -2,10 +2,12 @@ import 'package:firebase_database/firebase_database.dart';
 
 class FirebaseDB {
   var categoryData, categoryLength, wallsData, wallsIndexGlobal, dataRTDB;
+  List kumpulanLenkThumb = [];
+  List kumpulanLenkHD = [];
   Future<void> getAllTheData() async {
     final fbInstance = FirebaseDatabase.instance;
     await fbInstance.setPersistenceEnabled(true);
-    await fbInstance.setPersistenceCacheSizeBytes(33554432);
+    await fbInstance.setPersistenceCacheSizeBytes(10000);
     final databaseReference = fbInstance.reference();
     await databaseReference.once().then((DataSnapshot snapshot) {
       dataRTDB = snapshot.value;
@@ -18,8 +20,6 @@ class FirebaseDB {
   }
 
   Future<void> getWallsDatabase() async {
-    List kumpulanLenkThumb = [];
-    List kumpulanLenkHD = [];
     wallsData = dataRTDB["database"];
     final fbInstance = FirebaseDatabase.instance;
     final databaseReference = fbInstance.reference().child("index");
@@ -36,7 +36,5 @@ class FirebaseDB {
         kumpulanLenkHD.add(linkHD);
       }
     }
-    print(kumpulanLenkThumb);
-    print(kumpulanLenkHD);
   }
 }

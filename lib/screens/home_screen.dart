@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:walls_flutter/backend/database_thingy.dart';
@@ -11,14 +13,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var categoryData, categoryLength, wallsData;
+  var categoryData,
+      categoryLength,
+      wallsData,
+      kumpulanLenkThumb,
+      dataRTDB,
+      categoryIndex;
   void getCategoryValues() async {
     FirebaseDB fbDB = FirebaseDB();
     await fbDB.getAllTheData();
-    await fbDB.getCategoryDB();
-    await fbDB.getWallsDatabase();
+    dataRTDB = fbDB.dataRTDB;
+    if (dataRTDB != null) {
+      await fbDB.getCategoryDB();
+      await fbDB.getWallsDatabase();
+    }
     categoryData = fbDB.categoryData;
     categoryLength = fbDB.categoryLength;
+    kumpulanLenkThumb = fbDB.kumpulanLenkThumb;
+    categoryIndex = fbDB.wallsIndexGlobal;
+
+    wallsData = fbDB.wallsData;
     if (categoryData != null) {
       setState(() {});
     }
@@ -33,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: categoryData == null
+      body: dataRTDB == null
           ? Center(
               child: SpinKitDoubleBounce(
                 color: Theme.of(context).primaryColor,
@@ -73,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Theme.of(context).canvasColor),
                                       onPressed: () {},
                                       child: Text(
-                                        "See all",
+                                        "See all categories",
                                         style: GoogleFonts.sourceSansPro(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w700,
@@ -87,22 +101,31 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
-                          child: CarouselSlider.builder(
-                              itemCount: categoryLength,
-                              itemBuilder: (BuildContext context, int itemIndex,
-                                  int iDontKnowWhatsDis) {
-                                return FeaturedCategoryCard(
-                                    thumbnailURL: categoryData[itemIndex]
-                                        ["url"]);
-                              },
-                              options: CarouselOptions(
-                                enlargeStrategy:
-                                    CenterPageEnlargeStrategy.scale,
-                                viewportFraction: 1,
-                                height: 195,
-                                autoPlay: true,
-                                enlargeCenterPage: true,
-                              )),
+                          child: Column(
+                            children: [
+                              CarouselSlider.builder(
+                                  itemCount: categoryLength,
+                                  itemBuilder: (BuildContext context,
+                                      int itemIndex, int iDontKnowWhatsDis) {
+                                    return FeaturedCategoryCard(
+                                      thumbnailURL: categoryData[itemIndex]
+                                          ["url"],
+                                      categorie: categoryData[itemIndex]
+                                          ["title"],
+                                      allWallLink: wallsData[itemIndex]
+                                          ["wall_link"],
+                                    );
+                                  },
+                                  options: CarouselOptions(
+                                    enlargeStrategy:
+                                        CenterPageEnlargeStrategy.scale,
+                                    viewportFraction: 1,
+                                    height: 195,
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                  )),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 30.0),
@@ -126,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Theme.of(context).canvasColor),
                                         onPressed: () {},
                                         child: Text(
-                                          "See all",
+                                          "See all wallpapers",
                                           style: GoogleFonts.sourceSansPro(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w700,
@@ -143,6 +166,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  sliver: SliverGrid(
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext ctx, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14.0, vertical: 3),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl: kumpulanLenkThumb[index],
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () {},
+                                    ),
+                                  )
+                                ],
+                              )),
+                        );
+                      }, childCount: kumpulanLenkThumb.length),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.6,
+                        mainAxisSpacing: 6.0,
+                        crossAxisSpacing: 6.0,
+                      )),
+                )
               ],
             ),
     );

@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:walls_flutter/screens/category_screen.dart';
 
 class FeaturedCategoryCard extends StatelessWidget {
   final String thumbnailURL;
-  final Function onTap;
-  final String title;
+  final List allWallLink;
+  final String categorie;
 
   const FeaturedCategoryCard({
-    Key key,
     @required this.thumbnailURL,
-    this.onTap,
-    this.title,
-  })  : assert(thumbnailURL != null),
-        super(key: key);
+    @required this.allWallLink,
+    @required this.categorie,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,11 @@ class FeaturedCategoryCard extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  print("a");
+                  print(categorie);
+                  Get.to(() => CategoryScreen(
+                        allWallLink: allWallLink,
+                        categorie: categorie,
+                      ));
                 },
                 child: Container(
                   width: ScreenUtil().setWidth(985),
