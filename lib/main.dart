@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
       builder: () => GetMaterialApp(
         title: 'TenX Walls',
         theme: ThemeData.dark().copyWith(
+          dialogBackgroundColor: Color(0xFF1B1717),
+          backgroundColor: Color(0xFF1B1717),
           primaryColor: Color(0xFFCE1212),
           canvasColor: Color(0xFFEEEBDD),
           scaffoldBackgroundColor: Color(0xFF1B1717),
