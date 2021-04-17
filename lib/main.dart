@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(Get.width, Get.height),
       builder: () => GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'TenX Walls',
         theme: ThemeData.dark().copyWith(
           primaryColor: Color(0xFFCE1212),
           canvasColor: Color(0xFFEEEBDD),

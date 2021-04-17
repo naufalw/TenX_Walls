@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:walls_flutter/backend/database_thingy.dart';
@@ -13,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  CarouselController _carouselController = CarouselController();
   var categoryData,
       categoryLength,
       wallsData,
@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     categoryData = fbDB.categoryData;
     categoryLength = fbDB.categoryLength;
     kumpulanLenkThumb = fbDB.kumpulanLenkThumb;
+    kumpulanLenkThumb.shuffle();
     categoryIndex = fbDB.wallsIndexGlobal;
 
     wallsData = fbDB.wallsData;
@@ -42,6 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     getCategoryValues();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _carouselController.stopAutoPlay();
+    super.dispose();
   }
 
   @override
@@ -100,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                          padding: const EdgeInsets.only(top: 15.0),
                           child: Column(
                             children: [
                               CarouselSlider.builder(
@@ -116,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ["wall_link"],
                                     );
                                   },
+                                  carouselController: _carouselController,
                                   options: CarouselOptions(
                                     enlargeStrategy:
                                         CenterPageEnlargeStrategy.scale,
@@ -192,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               )),
                         );
-                      }, childCount: kumpulanLenkThumb.length),
+                      }, childCount: 6),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.6,
