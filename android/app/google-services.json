@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "130498364130",
+    "firebase_url": "https://tenx-papers-default-rtdb.firebaseio.com",
+    "project_id": "tenx-papers",
+    "storage_bucket": "tenx-papers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130498364130:android:13e46e40b5e8ec501214bb",
+        "android_client_info": {
+          "package_name": "com.nopalgemink.walls"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130498364130-hmco2bsjn5b41fvqr8rce2ldq6p4a5fo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqMVarqtDW9P_p_sAp5nrRQsqn5kS871I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130498364130-hmco2bsjn5b41fvqr8rce2ldq6p4a5fo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
