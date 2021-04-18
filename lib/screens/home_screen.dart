@@ -20,14 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   CarouselController _carouselController = CarouselController();
-  var categoryData,
-      categoryLength,
-      wallsData,
-      kumpulanLenkThumb,
-      kumpulanLenkHD,
-      dataRTDB,
-      categoryIndex;
-  List allWallLink, allWallLinkNotShuffled;
+  var categoryData, categoryLength, wallsData, dataRTDB, categoryIndex;
+  List allWallLinkShuffled, allWallLinkNotShuffled;
   void getCategoryValues() async {
     FirebaseDB fbDB = FirebaseDB();
     await fbDB.getAllTheData();
@@ -37,14 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
       await fbDB.getWallsDatabase();
     }
     allWallLinkNotShuffled = fbDB.allWallLink;
-    allWallLink = fbDB.allWallLink;
-    allWallLink.shuffle();
+    allWallLinkShuffled = fbDB.allWallLinkShuffled;
     categoryData = fbDB.categoryData;
     categoryLength = fbDB.categoryLength;
-    kumpulanLenkThumb = fbDB.kumpulanLenkThumb;
-    kumpulanLenkThumb.shuffle();
     categoryIndex = fbDB.wallsIndexGlobal;
-
     wallsData = fbDB.wallsData;
     if (categoryData != null) {
       setState(() {});
@@ -231,7 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fit: StackFit.expand,
                                     children: [
                                       CachedNetworkImage(
-                                        imageUrl: allWallLink[index]["thumb"],
+                                        imageUrl: allWallLinkShuffled[index]
+                                            ["thumb"],
                                         fit: BoxFit.cover,
                                       ),
                                       Material(
@@ -239,7 +230,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: InkWell(
                                           onTap: () async {
                                             String url =
-                                                allWallLink[index]["url"];
+                                                allWallLinkShuffled[index]
+                                                    ["url"];
                                             ProgressHUD.of(ctx).show();
                                             var file =
                                                 await DefaultCacheManager()

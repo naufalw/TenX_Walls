@@ -2,9 +2,8 @@ import 'package:firebase_database/firebase_database.dart';
 
 class FirebaseDB {
   var categoryData, categoryLength, wallsData, wallsIndexGlobal, dataRTDB;
-  List kumpulanLenkThumb = [];
-  List kumpulanLenkHD = [];
   List allWallLink = [];
+  List allWallLinkShuffled = [];
   Future<void> getAllTheData() async {
     final fbInstance = FirebaseDatabase.instance;
     await fbInstance.setPersistenceEnabled(true);
@@ -27,17 +26,15 @@ class FirebaseDB {
     await databaseReference.once().then((DataSnapshot snapshot) {
       wallsIndexGlobal = snapshot.value;
     });
+    print(wallsIndexGlobal);
 
     for (var indexglob = 0; indexglob < wallsIndexGlobal.length; indexglob++) {
       var jumlahWall = wallsData[indexglob]["wall_link"].length;
-
       for (var i = 0; i < jumlahWall; i++) {
-        var linkThumb = wallsData[indexglob]["wall_link"][i]["thumb"];
-        var linkHD = wallsData[indexglob]["wall_link"][i]["url"];
         allWallLink.add(wallsData[indexglob]["wall_link"][i]);
-        kumpulanLenkThumb.add(linkThumb);
-        kumpulanLenkHD.add(linkHD);
+        allWallLinkShuffled.add(wallsData[indexglob]["wall_link"][i]);
       }
     }
+    allWallLinkShuffled.shuffle();
   }
 }

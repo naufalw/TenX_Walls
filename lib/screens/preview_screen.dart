@@ -1,9 +1,12 @@
 import 'dart:io';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:random_string/random_string.dart';
+import 'package:share/share.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class PreviewScreen extends StatefulWidget {
@@ -44,8 +47,20 @@ class _PreviewScreenState extends State<PreviewScreen> {
         appBar: AppBar(
           title: Text("Preview"),
         ),
-        body: PinchZoom(image: Image.file(imgPath)),
+        body: Center(
+          child: ExtendedImage.file(
+            imgPath,
+            fit: BoxFit.cover,
+            mode: ExtendedImageMode.gesture,
+            initGestureConfigHandler: (state) {
+              return GestureConfig(inPageView: false);
+            },
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           currentIndex: 1,
           items: [
@@ -53,28 +68,11 @@ class _PreviewScreenState extends State<PreviewScreen> {
                 icon: Icon(Icons.info), label: "Information"),
             BottomNavigationBarItem(icon: Icon(Icons.check), label: "Apply"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.download_sharp), label: "Download")
+                icon: Icon(Icons.download_sharp), label: "Download"),
+            BottomNavigationBarItem(icon: Icon(Icons.share), label: "Share")
           ],
-          onTap: (index) {
+          onTap: (index) async {
             if (index == 1) {
-              // Get.defaultDialog(
-              //     backgroundColor: Theme.of(context).canvasColor,
-              //     content: Container(
-              //         color: Theme.of(context).canvasColor,
-              //         child: SimpleDialog(
-              //           backgroundColor: Theme.of(context).canvasColor,
-              //           children: [
-              //             SimpleDialogOption(
-              //               child: Text("Hennn"),
-              //             ),
-              //             SimpleDialogOption(
-              //               child: Text("Hennn"),
-              //             ),
-              //             SimpleDialogOption(
-              //               child: Text("Hennn"),
-              //             )
-              //           ],
-              //         )));
               showConfirmationDialog(
                   context: context,
                   title: "Select Location",
@@ -95,6 +93,28 @@ class _PreviewScreenState extends State<PreviewScreen> {
                       imgPath.path, WallpaperManager.BOTH_SCREENS);
                 }
               });
+            } else if (index == 3) {
+              Share.shareFiles([imgPath.path]);
+            } else if (index == 2) {
+              var status = await Permission.storage.status;
+              if (!status.isGranted) {
+                await Permission.storage.request();
+              }
+              Directory tempDir =
+                  await DownloadsPathProvider.downloadsDirectory;
+              String tempPath = tempDir.path;
+              await imgPath.copy("$tempPath/${randomAlpha(10)}.jpg");
+              Get.showSnackbar(GetBar(
+                title: "Success",
+                duration: Duration(seconds: 2),
+                message: "Wallpaper copied to downloads folder",
+              ));
+            } else if (index == 0) {
+              showOkAlertDialog(
+                  context: context,
+                  title: "Information",
+                  message:
+                      "TenX OS Wallpaper\nDesigned by Roger Truttmann\nLead Developer : Advaith Bath\nApp Developer : Naufal Wiwit P");
             }
           },
         ),
