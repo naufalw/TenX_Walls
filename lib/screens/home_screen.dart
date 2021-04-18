@@ -140,13 +140,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       itemBuilder: (BuildContext context,
                                           int itemIndex,
                                           int iDontKnowWhatsDis) {
-                                        return FeaturedCategoryCard(
-                                          thumbnailURL: categoryData[itemIndex]
-                                              ["url"],
-                                          categorie: categoryData[itemIndex]
-                                              ["title"],
-                                          allWallLink: wallsData[itemIndex]
-                                              ["wall_link"],
+                                        return AspectRatio(
+                                          aspectRatio: 18 / 9,
+                                          child: FeaturedCategoryCard(
+                                            thumbnailURL:
+                                                categoryData[itemIndex]["url"],
+                                            categorie: categoryData[itemIndex]
+                                                ["title"],
+                                            allWallLink: wallsData[itemIndex]
+                                                ["wall_link"],
+                                          ),
                                         );
                                       },
                                       carouselController: _carouselController,

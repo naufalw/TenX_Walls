@@ -27,11 +27,15 @@ dependencies:
   cached_network_image: ^3.0.0
   carousel_slider: ^3.0.0
   cupertino_icons: ^1.0.2
+  device_preview: ^0.7.1
+  dio: ^4.0.0
+  dio_cache_interceptor: ^2.1.1
   downloads_path_provider_28: ^0.1.0
   extended_image: ^4.0.1
   firebase_core: ^1.0.3
   firebase_database: ^6.1.2
   flutter_cache_manager: ^3.0.1
+  flutter_native_splash: ^1.1.7+1
   flutter_progress_hud: ^2.0.0
   flutter_screenutil: ^5.0.0
   flutter_spinkit: ^5.0.0
@@ -46,7 +50,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app.png"
+
+flutter_native_splash:
+  color: "#1B1717"
+  image: assets/app.png
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
@@ -57,8 +70,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+assets:
+  - assets/app.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

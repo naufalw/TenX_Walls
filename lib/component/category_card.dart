@@ -22,14 +22,14 @@ class FeaturedCategoryCard extends StatelessWidget {
         ScreenUtil().setWidth(14),
       ),
       child: Container(
-        width: ScreenUtil().setWidth(780),
-        height: ScreenUtil().setHeight(480),
+        width: ScreenUtil().setWidth(985),
+        height: ScreenUtil().screenWidth,
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
             CachedNetworkImage(
               width: ScreenUtil().setWidth(985),
-              height: ScreenUtil().setHeight(480),
+              height: ScreenUtil().screenWidth,
               fit: BoxFit.cover,
               imageUrl: thumbnailURL,
             ),
@@ -37,7 +37,7 @@ class FeaturedCategoryCard extends StatelessWidget {
               opacity: 0.24,
               child: Container(
                 width: ScreenUtil().setWidth(985),
-                height: ScreenUtil().setHeight(480),
+                height: ScreenUtil().screenWidth,
                 color: Color(0xff4D4E51),
               ),
             ),
@@ -53,7 +53,7 @@ class FeaturedCategoryCard extends StatelessWidget {
                 },
                 child: Container(
                   width: ScreenUtil().setWidth(985),
-                  height: ScreenUtil().setHeight(480),
+                  height: ScreenUtil().screenWidth,
                   // color: Colors.red,
                 ),
               ),
