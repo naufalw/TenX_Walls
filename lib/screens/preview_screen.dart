@@ -81,16 +81,28 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     AlertDialogAction(label: "Lock Screen", key: "lock"),
                     AlertDialogAction(label: "Both", key: "both"),
                   ]).then((value) async {
-                if (value == "home") {
-                  await WallpaperManager.setWallpaperFromFile(
-                      imgPath.path, WallpaperManager.HOME_SCREEN);
-                } else if (value == "lock") {
-                  await WallpaperManager.setWallpaperFromFile(
-                      imgPath.path, WallpaperManager.LOCK_SCREEN);
-                }
-                if (value == "both") {
-                  await WallpaperManager.setWallpaperFromFile(
-                      imgPath.path, WallpaperManager.BOTH_SCREENS);
+                try {
+                  if (value == "home") {
+                    await WallpaperManager.setWallpaperFromFile(
+                        imgPath.path, WallpaperManager.HOME_SCREEN);
+                  } else if (value == "lock") {
+                    await WallpaperManager.setWallpaperFromFile(
+                        imgPath.path, WallpaperManager.LOCK_SCREEN);
+                  } else if (value == "both") {
+                    await WallpaperManager.setWallpaperFromFile(
+                        imgPath.path, WallpaperManager.BOTH_SCREENS);
+                  }
+                  Get.showSnackbar(GetBar(
+                    title: "Success",
+                    message: "Wallpaper has been set",
+                    duration: Duration(seconds: 2),
+                  ));
+                } catch (e) {
+                  Get.showSnackbar(GetBar(
+                    title: "Error",
+                    message: e.toString(),
+                    duration: Duration(seconds: 2),
+                  ));
                 }
               });
             } else if (index == 3) {
