@@ -34,7 +34,7 @@ class FeaturedCategoryCard extends StatelessWidget {
               imageUrl: thumbnailURL,
             ),
             Opacity(
-              opacity: 0.24,
+              opacity: 0,
               child: Container(
                 width: ScreenUtil().setWidth(985),
                 height: ScreenUtil().screenWidth,

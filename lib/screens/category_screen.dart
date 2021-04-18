@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:walls_flutter/screens/preview_screen.dart';
@@ -54,17 +55,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
           slivers: [
             SliverAppBar(
               title: Text(categorie),
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              floating: true,
+              snap: true,
+              backgroundColor: Theme.of(context).primaryColor,
               elevation: 0.0,
             ),
             SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtil().setWidth(8),
+                  vertical: ScreenUtil().setHeight(10)),
               sliver: SliverGrid(
                   delegate:
                       SliverChildBuilderDelegate((BuildContext ctx, int index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14.0, vertical: 3),
+                      padding: EdgeInsets.symmetric(
+                          vertical: ScreenUtil().setHeight(3.0),
+                          horizontal: ScreenUtil().setWidth(14.0)),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Stack(
@@ -99,8 +105,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.6,
-                    mainAxisSpacing: 6.0,
-                    crossAxisSpacing: 6.0,
+                    mainAxisSpacing: ScreenUtil().setHeight(6.0),
+                    crossAxisSpacing: ScreenUtil().setWidth(6.0),
                   )),
             )
           ],

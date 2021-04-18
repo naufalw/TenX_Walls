@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:walls_flutter/component/font_size.dart';
 import 'package:walls_flutter/screens/all_category.dart';
 
 class CategoriesRow extends StatelessWidget {
@@ -20,7 +21,7 @@ class CategoriesRow extends StatelessWidget {
       children: [
         Text("Categories",
             style: GoogleFonts.sourceSansPro(
-                fontSize: 27, fontWeight: FontWeight.w600)),
+                fontSize: FontSize.fontSize28, fontWeight: FontWeight.w600)),
         TextButton(
             style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -35,9 +36,9 @@ class CategoriesRow extends StatelessWidget {
             child: Text(
               "See all categories",
               style: GoogleFonts.sourceSansPro(
-                  fontSize: 18,
+                  fontSize: FontSize.fontSize18,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColor),
+                  color: Colors.white),
             ))
       ],
     );

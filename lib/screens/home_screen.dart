@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Theme.of(context).scaffoldBackgroundColor,
                         elevation: 0.0,
                         centerTitle: true,
-                        title: Text("Ten-X Wallpapers",
+                        title: Text("TenX Wallpapers",
                             style: GoogleFonts.mukta(
                                 fontSize: 39, fontWeight: FontWeight.w800))),
                     SliverPadding(

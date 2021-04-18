@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:walls_flutter/component/font_size.dart';
 import 'package:walls_flutter/screens/all_papers.dart';
 
 class BrowseRow extends StatelessWidget {
@@ -23,7 +24,8 @@ class BrowseRow extends StatelessWidget {
               children: [
                 Text("Browse",
                     style: GoogleFonts.sourceSansPro(
-                        fontSize: 27, fontWeight: FontWeight.w600)),
+                        fontSize: FontSize.fontSize28,
+                        fontWeight: FontWeight.w600)),
                 TextButton(
                     style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -34,13 +36,11 @@ class BrowseRow extends StatelessWidget {
                             allWallLink: allWallLinkNotShuffled,
                           ));
                     },
-                    child: Text(
-                      "See all wallpapers",
-                      style: GoogleFonts.sourceSansPro(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context).primaryColor),
-                    ))
+                    child: Text("See all wallpapers",
+                        style: GoogleFonts.sourceSansPro(
+                            fontSize: FontSize.fontSize18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white)))
               ],
             ),
           ],

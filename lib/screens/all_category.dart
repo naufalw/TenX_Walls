@@ -27,7 +27,9 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            snap: true,
+            floating: true,
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text(
               "All Categories",
             ),
@@ -36,7 +38,9 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(
+                    vertical: ScreenUtil().setHeight(8.0),
+                    horizontal: ScreenUtil().setWidth(8.0)),
                 child: AspectRatio(
                   aspectRatio: 18 / 9,
                   child: ClipRRect(
@@ -56,7 +60,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
                             imageUrl: categoryData[index]["url"],
                           ),
                           Opacity(
-                            opacity: 0.24,
+                            opacity: 0,
                             child: Container(
                               width: ScreenUtil().setWidth(985),
                               height: ScreenUtil().setHeight(480),
