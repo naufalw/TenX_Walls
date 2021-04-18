@@ -38,7 +38,7 @@ class _AllWallPapersScreenState extends State<AllWallPapersScreen> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: Text("All WallPapers"),
+              title: Text("All Wallpapers"),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               elevation: 0.0,
             ),
