@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walls_flutter/component/category_card.dart';
 
 class CategoryCarousel extends StatelessWidget {
@@ -19,7 +20,7 @@ class CategoryCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0),
+      padding: EdgeInsets.only(top: ScreenUtil().setHeight(15)),
       child: Column(
         children: [
           CarouselSlider.builder(
@@ -39,7 +40,7 @@ class CategoryCarousel extends StatelessWidget {
               options: CarouselOptions(
                 enlargeStrategy: CenterPageEnlargeStrategy.scale,
                 viewportFraction: 1,
-                height: 195,
+                height: ScreenUtil().screenHeight * 0.22,
                 autoPlay: true,
                 enlargeCenterPage: true,
               )),
