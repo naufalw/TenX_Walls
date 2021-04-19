@@ -21,45 +21,26 @@ class FeaturedCategoryCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(
         ScreenUtil().setWidth(14),
       ),
-      child: Container(
-        width: ScreenUtil().setWidth(985),
-        height: ScreenUtil().screenWidth,
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            CachedNetworkImage(
-              width: ScreenUtil().setWidth(985),
-              height: ScreenUtil().screenWidth,
-              fit: BoxFit.cover,
-              imageUrl: thumbnailURL,
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: thumbnailURL,
+          ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                print(categorie);
+                Get.to(() => CategoryScreen(
+                      allWallLink: allWallLink,
+                      categorie: categorie,
+                    ));
+              },
             ),
-            Opacity(
-              opacity: 0,
-              child: Container(
-                width: ScreenUtil().setWidth(985),
-                height: ScreenUtil().screenWidth,
-                color: Color(0xff4D4E51),
-              ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  print(categorie);
-                  Get.to(() => CategoryScreen(
-                        allWallLink: allWallLink,
-                        categorie: categorie,
-                      ));
-                },
-                child: Container(
-                  width: ScreenUtil().setWidth(985),
-                  height: ScreenUtil().screenWidth,
-                  // color: Colors.red,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

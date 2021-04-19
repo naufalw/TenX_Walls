@@ -62,51 +62,46 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(8),
+                  horizontal: ScreenUtil().setWidth(22),
                   vertical: ScreenUtil().setHeight(10)),
               sliver: SliverGrid(
                   delegate:
                       SliverChildBuilderDelegate((BuildContext ctx, int index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: ScreenUtil().setHeight(3.0),
-                          horizontal: ScreenUtil().setWidth(14.0)),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl: allThumbLink[index],
-                                fit: BoxFit.cover,
+                    return ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: allThumbLink[index],
+                              fit: BoxFit.cover,
+                            ),
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () async {
+                                  String url = allHDLink[index];
+                                  ProgressHUD.of(ctx).show();
+                                  var file = await DefaultCacheManager()
+                                      .getSingleFile(url);
+                                  if (file != null) {
+                                    ProgressHUD.of(ctx).dismiss();
+                                    Get.to(() => PreviewScreen(
+                                          url: url,
+                                          imgPath: file,
+                                        ));
+                                  }
+                                },
                               ),
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () async {
-                                    String url = allHDLink[index];
-                                    ProgressHUD.of(ctx).show();
-                                    var file = await DefaultCacheManager()
-                                        .getSingleFile(url);
-                                    if (file != null) {
-                                      ProgressHUD.of(ctx).dismiss();
-                                      Get.to(() => PreviewScreen(
-                                            url: url,
-                                            imgPath: file,
-                                          ));
-                                    }
-                                  },
-                                ),
-                              )
-                            ],
-                          )),
-                    );
+                            )
+                          ],
+                        ));
                   }, childCount: allThumbLink.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.6,
-                    mainAxisSpacing: ScreenUtil().setHeight(6.0),
-                    crossAxisSpacing: ScreenUtil().setWidth(6.0),
+                    mainAxisSpacing: ScreenUtil().setHeight(10.0),
+                    crossAxisSpacing: ScreenUtil().setWidth(20.0),
                   )),
             )
           ],

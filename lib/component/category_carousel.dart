@@ -40,7 +40,6 @@ class CategoryCarousel extends StatelessWidget {
               options: CarouselOptions(
                 enlargeStrategy: CenterPageEnlargeStrategy.scale,
                 viewportFraction: 1,
-                height: ScreenUtil().screenHeight * 0.22,
                 autoPlay: true,
                 enlargeCenterPage: true,
               )),

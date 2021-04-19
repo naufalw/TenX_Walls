@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:walls_flutter/backend/database_thingy.dart';
@@ -104,8 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: GoogleFonts.mukta(
                                 fontSize: 39, fontWeight: FontWeight.w800))),
                     SliverPadding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 22, vertical: 25),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(22),
+                          vertical: ScreenUtil().setHeight(25)),
                       sliver: SliverList(
                         delegate: SliverChildListDelegate.fixed(
                           [
@@ -123,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(22)),
                       sliver: RandomWallsGrid(
                           allWallLinkShuffled: allWallLinkShuffled,
                           nHomeWalls: nHomeWalls),

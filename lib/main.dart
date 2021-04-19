@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(Get.width, Get.height),
+      designSize: Size(345.9459538719465, 682.2822979141166),
       builder: () => GetMaterialApp(
         title: 'TenX Walls',
         theme: ThemeData.dark().copyWith(
