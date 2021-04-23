@@ -24,8 +24,7 @@ class BrowseRow extends StatelessWidget {
               children: [
                 Text("Browse",
                     style: GoogleFonts.sourceSansPro(
-                        fontSize: FontSize.fontSize28,
-                        fontWeight: FontWeight.w600)),
+                        fontSize: 28, fontWeight: FontWeight.w600)),
                 TextButton(
                     style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -38,7 +37,7 @@ class BrowseRow extends StatelessWidget {
                     },
                     child: Text("See all wallpapers",
                         style: GoogleFonts.sourceSansPro(
-                            fontSize: FontSize.fontSize18,
+                            fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: Colors.white)))
               ],

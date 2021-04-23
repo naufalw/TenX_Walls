@@ -53,8 +53,8 @@ class RandomWallsGrid extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 0.6,
-          mainAxisSpacing: ScreenUtil().setHeight(10.0),
-          crossAxisSpacing: ScreenUtil().setWidth(20.0),
+          mainAxisSpacing: ScreenUtil().setHeight(15.0),
+          crossAxisSpacing: ScreenUtil().setWidth(12.0),
         ));
   }
 }

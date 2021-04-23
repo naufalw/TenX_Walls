@@ -6,6 +6,8 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info/package_info.dart';
+import 'package:r_upgrade/r_upgrade.dart';
 import 'package:walls_flutter/backend/database_thingy.dart';
 import 'package:walls_flutter/component/browse_row.dart';
 import 'package:walls_flutter/component/categories_row.dart';
@@ -23,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Map dataJson;
   JsonDB jsonDB = JsonDB();
   int nHomeWalls = 6;
+  int id;
 
   void getAllData() async {
     await jsonDB.getJson();
@@ -34,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     allWallLinkShuffled = jsonDB.allWallLinkShuffled;
     categoryData = jsonDB.categoryData;
     wallsData = jsonDB.wallsData;
+    updateApp();
     if (wallsData != null) {
       setState(() {});
     }
@@ -48,6 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
     categoryData = jsonDB.categoryData;
     wallsData = jsonDB.wallsData;
     setState(() {});
+  }
+
+  void updateApp() async {
+    String currentVer = dataJson["app"]["latest"];
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String installedVer = packageInfo.version;
+    if (installedVer != currentVer) {
+      id = await RUpgrade.upgrade(dataJson["app"]["url"],
+          isAutoRequestInstall: true,
+          notificationStyle: NotificationStyle.speechAndPlanTime);
+    }
   }
 
   @override

@@ -21,7 +21,7 @@ class CategoriesRow extends StatelessWidget {
       children: [
         Text("Categories",
             style: GoogleFonts.sourceSansPro(
-                fontSize: FontSize.fontSize28, fontWeight: FontWeight.w600)),
+                fontSize: 28, fontWeight: FontWeight.w600)),
         TextButton(
             style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -36,7 +36,7 @@ class CategoriesRow extends StatelessWidget {
             child: Text(
               "See all categories",
               style: GoogleFonts.sourceSansPro(
-                  fontSize: FontSize.fontSize18,
+                  fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: Colors.white),
             ))

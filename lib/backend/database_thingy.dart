@@ -12,7 +12,7 @@ class JsonDB {
   Dio dio = Dio();
   var docDir, options;
   String requestURL =
-      "https://raw.githubusercontent.com/TenX-OS/TenX_Wallpapers/master/tenx-papersdb.json";
+      "https://raw.githubusercontent.com/TenX-OS/TenX_Wallpapers/master/tenx-wallsDB.json";
   Future<void> configureDio() async {
     docDir = await getApplicationDocumentsDirectory();
     options = CacheOptions(
